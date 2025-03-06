@@ -4,50 +4,37 @@ class Program
 {
     static void Main(string[] args)
     {
-        
-        DisplayWelcomeMessage();
-
-        
+        DisplayWelcome();
         string userName = PromptUserName();
 
-        
-        int userAge = PromptUserAge();
+        int userNumber = PromptUserNumber();
 
-        int ageInMonths = CalculateAgeInMonths(userAge);
+        int squaredNumber = SquareNumber(userNumber);
 
-        DisplayResult(userName, ageInMonths);
+        DisplayResult(userName, squaredNumber);
     }
-
-    static void DisplayWelcomeMessage()
+ 
+    static void DisplayWelcome()
     {
-        Console.WriteLine("Welcome to the Age Calculator!");
+        Console.WriteLine("Welcome to the Program!");
     }
-    // Function to prompt the user for their name
     static string PromptUserName()
     {
-        Console.Write("Please enter your name: ");
-        string name = Console.ReadLine();
-
-        return name;
+        Console.Write("Please enter your  fullname: ");
+        return Console.ReadLine();
     }
-
-    // Function to prompt the user for their age
-    static int PromptUserAge()
+    static int PromptUserNumber()
     {
-        Console.Write("Please enter your age: ");
-        int age = int.Parse(Console.ReadLine());
-
-        return age;
+        Console.Write("Please enter your favorite number: ");
+        return int.Parse(Console.ReadLine());
     }
-    // Function to calculate the age in months
-    static int CalculateAgeInMonths(int age)
+    
+    static int SquareNumber(int number)
     {
-        return age * 12;  // 1 year = 12 months
+        return number * number;
     }
-
-    // Function to display the result
-    static void DisplayResult(string name, int ageInMonths)
+    static void DisplayResult(string name, int square)
     {
-        Console.WriteLine($"{name}, you are {ageInMonths} months old.");
+        Console.WriteLine($"{name}, the square of your number is {square}");
     }
 }

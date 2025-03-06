@@ -4,23 +4,40 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Ask for the user's age
-        Console.Write("Please enter your age: ");
-        int age = int.Parse(Console.ReadLine());
+        Console.Write("Enter your grade percentage: ");
+        int gradePercentage = int.Parse(Console.ReadLine());
 
-        // Determine if the person is "young" ,"adult" and old
-        if (age <= 18)
+        string letter = "";
+
+        if (gradePercentage >= 90)
         {
-            Console.WriteLine("You are young.");
+           letter = "A";
         }
-        else if (age <= 50)
+        else if (gradePercentage >= 80)
         {
-            Console.WriteLine("You are an old person.");
+            letter = "B";
+        }
+        else if (gradePercentage >= 70)
+        {
+            letter = "C";
+        }
+        else if (gradePercentage >= 60)
+        {
+            letter = "D";
         }
         else
         {
-            Console.WriteLine("You are an adult.");
+            letter = "F";
+        }
+
+    
+        if (gradePercentage >= 70)
+        {
+            Console.WriteLine($"Your grade is {letter}. Congratulations, you passed!");
+        }
+        else
+        {
+            Console.WriteLine($"Your grade is {letter} you didn't pass");
         }
     }
 }
-
