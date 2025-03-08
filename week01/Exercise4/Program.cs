@@ -9,6 +9,7 @@ class Program
         int userNumber;
 
         Console.WriteLine("Enter a list of numbers, type 0 when finished.");
+        do
         {
             Console.Write("Enter number: ");
             userNumber = int.Parse(Console.ReadLine());
@@ -16,8 +17,9 @@ class Program
             {
                 numbers.Add(userNumber);
             }
-
-        } while (userNumber != 0);
+        
+        }
+        while (userNumber != 0);
 
         // Calculate sum
         int sum = 0;
@@ -37,8 +39,9 @@ class Program
             {
                 largest = number;
             }
+        
         }
- // Find the smallest positive number
+        // Find the smallest positive number
         int smallestPositive = int.MaxValue;
         foreach (int number in numbers)
         {
@@ -47,7 +50,6 @@ class Program
                 smallestPositive = number;
             }
         }
-
         // Sort the list
         numbers.Sort();
 
@@ -63,5 +65,6 @@ class Program
         {
             Console.WriteLine(number);
         }
+        
     }
-}   
+}
