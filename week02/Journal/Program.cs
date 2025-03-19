@@ -70,15 +70,13 @@ class Program
 
         Console.WriteLine(prompt);
         Console.Write("> ");
-        string response = Console.ReadLine();
 
         // Create new entry with current date
         JournalEntry newEntry = new JournalEntry
         {
-           Date = DateTime.Now.ToString("M/d/yyyy"),
+           Date = DateTime.Now.ToString(""),
            //DateTime theCurrentTime = DateTime.Now;
             Prompt = prompt,
-            Response = response
         };
 
         journalEntries.Add(newEntry);
@@ -89,7 +87,7 @@ class Program
     {
         foreach (var entry in journalEntries)
         {
-            Console.WriteLine($"Date: {entry.Date} - Prompt: {entry.Prompt}\n {entry.Response}");
+            Console.WriteLine($"Date: {entry.Date} - Prompt: {entry.Prompt}\n ");
         }
         
     }

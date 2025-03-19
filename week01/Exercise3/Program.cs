@@ -19,7 +19,6 @@ internal class Program
         while (guess != listNumber && attempts < maxAttempts)
         {
             Console.Write("What is your guess? ");
-            guess = int.Parse(Console.ReadLine());
             attempts++;
 
             if (listNumber > guess)
