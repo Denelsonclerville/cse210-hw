@@ -6,26 +6,50 @@ class Program
 {
     public class Word
     {
-        public string Value { get; set; }
-        public bool WordHidden { get; set; }
+        private string _Value { get; set; }
+        public bool _WordHidden { get; set; }
 
         public Word(string value)
         {
-            Value = value;
-            WordHidden = false;
+            _Value = value;
+            _WordHidden = false;
         }
         public string GetDisplayText()
         {
-            return WordHidden ? new string('_', Value.Length) : Value;
+            return _WordHidden ? new string('_', _Value.Length) : _Value;
         }
     }
+
+
+    // Define the reference
+     public class Reference
+    {
+        private string _Book { get; set; }
+        private string _Chapter { get; set; }
+        private string _Verse { get; set; }
+
+        // Constructor to initialize Book, Chapter, and Verse
+        public Reference(string book, string chapter, string verse)
+        {
+            _Book = book;
+            _Chapter = chapter;
+            _Verse = verse;
+        }
+
+        public string FullReference()
+        {
+            return $"{_Book} {_Chapter}:{_Verse}";
+        }
+    }
+
+    // Define the Scripture class
     public class Scripture
     {
-        public string Scripturesimiliar { get; set; }
+        private string FullReference { get; set; }
         public List<Word> Words { get; set; }
         public Scripture(string reference, string text)
         {
-            Scripturesimiliar = reference;
+            FullReference = reference;
             Words = new List<Word>();
             var wordArray = text.Split(new[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (var word in wordArray)
@@ -33,11 +57,13 @@ class Program
                 Words.Add(new Word(word));
             }
         }
+
+        // Display the reference and the text
         public void DisplayScripture()
         {
             Console.Clear();
             Console.Beep();
-            Console.Write(Scripturesimiliar + " ");
+            Console.Write(FullReference + " ");
             foreach (var word in Words)
             {
                 Console.Write(word.GetDisplayText() + " ");
@@ -45,10 +71,12 @@ class Program
             Console.WriteLine("\n");
         }
 
+
+        // hide words
         public void HideWord()
         {
             var random = new Random();
-            var unhiddenWords = Words.Where(w => !w.WordHidden).ToList();
+            var unhiddenWords = Words.Where(w => !w._WordHidden).ToList();
 
             if (unhiddenWords.Count >= 2)
             {
@@ -60,12 +88,14 @@ class Program
                     word2 = unhiddenWords[random.Next(unhiddenWords.Count)];
                 }
 
-                word1.WordHidden = true;
-                word2.WordHidden = true;
+                word1._WordHidden = true;
+                word2._WordHidden = true;
             }
         }
     }
 
+
+     // The main program
     static void Main(string[] args)
     {
         var reference = "Matthew 12:12-13";
@@ -76,7 +106,8 @@ class Program
 
         while (true)
         {
-            Console.WriteLine("Press Enter to continue or type 'quit' to finish.");
+            Console.WriteLine("Press Enter to continue or type 'quit' to finish."); 
+             Console.Write(">");         
             string user = Console.ReadLine().ToLower();
             if (user == "quit")
             {
@@ -87,7 +118,7 @@ class Program
             bool allHidden = true;
             foreach (var word in scripture.Words)
             {
-                if (!word.WordHidden)
+                if (!word._WordHidden)
                 {
                     allHidden = false;
                     break;
@@ -96,7 +127,7 @@ class Program
 
             if (allHidden)
             {
-                Console.WriteLine("The words of this scripture are hidden.");
+                Console.WriteLine("Stop pressing!\n");
                 break;
             }
         }
