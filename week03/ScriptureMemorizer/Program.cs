@@ -38,7 +38,7 @@ class Program
             bool allHidden = true;
             foreach (var word in scripture.Words)
             {
-                if (!word._WordHidden)
+                if (!word._wordHidden)
                 {
                     allHidden = false;
                     break;
@@ -94,7 +94,7 @@ class Program
                         }
                         else
                         {
-                            Console.WriteLine($"Sorry, that's not the correct word, the word was. Try again.");
+                            Console.WriteLine($"Sorry, that's not the correct word, Try again.");
                         }
                     }
 
