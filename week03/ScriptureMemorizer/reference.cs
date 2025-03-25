@@ -2,20 +2,20 @@ namespace ScriptureMemorizer
 {
     public class Reference
     {
-        private string _Book { get; set; }
-        private string _Chapter { get; set; }
-        private string _Verse { get; set; }
+        private string _book { get; set; }
+        private string _chapter { get; set; }
+        private string _verse { get; set; }
 
         public Reference(string book, string chapter, string verse)
         {
-            _Book = book;
-            _Chapter = chapter;
-            _Verse = verse;
+            _book = book;
+            _chapter = chapter;
+            _verse = verse;
         }
 
         public string FullReference()
         {
-            return $"{_Book} {_Chapter}:{_Verse}";
+            return $"{_book} {_chapter}:{_verse}";
         }
     }
 }

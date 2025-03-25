@@ -2,21 +2,21 @@ namespace ScriptureMemorizer
 {
     public class Word
     {
-        private string _Value { get; set; }
-        public bool _WordHidden { get; set; }
+        private string _value { get; set; }
+        public bool _wordHidden { get; set; }
 
         public Word(string value)
         {
-            _Value = value;
-            _WordHidden = false;
+            _value = value;
+            _wordHidden = false;
         }
 
         public string GetDisplayText()
         {
-            return _WordHidden ? new string('_', _Value.Length) : _Value;
+            return _wordHidden ? new string('_', _value.Length) : _value;
         }
 
-        public string GetValue() => _Value; 
+        public string GetValue() => _value; 
     }
  
 }
