@@ -4,98 +4,15 @@ using System.Linq;
 
 class Program
 {
-    public class Word
+    static string HideAllWord(string text, List<string> mots)
     {
-        private string _Value { get; set; }
-        public bool _WordHidden { get; set; }
-
-        public Word(string value)
+        foreach (var mot in mots)
         {
-            _Value = value;
-            _WordHidden = false;
+            text = text.Replace(mot, new string('_', mot.Length));
         }
-        public string GetDisplayText()
-        {
-            return _WordHidden ? new string('_', _Value.Length) : _Value;
-        }
+        return text;
     }
 
-
-    // Define the reference
-     public class Reference
-    {
-        private string _Book { get; set; }
-        private string _Chapter { get; set; }
-        private string _Verse { get; set; }
-
-        // Constructor to initialize Book, Chapter, and Verse
-        public Reference(string book, string chapter, string verse)
-        {
-            _Book = book;
-            _Chapter = chapter;
-            _Verse = verse;
-        }
-
-        public string FullReference()
-        {
-            return $"{_Book} {_Chapter}:{_Verse}";
-        }
-    }
-
-    // Define the Scripture class
-    public class Scripture
-    {
-        private string FullReference { get; set; }
-        public List<Word> Words { get; set; }
-        public Scripture(string reference, string text)
-        {
-            FullReference = reference;
-            Words = new List<Word>();
-            var wordArray = text.Split(new[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var word in wordArray)
-            {
-                Words.Add(new Word(word));
-            }
-        }
-
-        // Display the reference and the text
-        public void DisplayScripture()
-        {
-            Console.Clear();
-            Console.Beep();
-            Console.Write(FullReference + " ");
-            foreach (var word in Words)
-            {
-                Console.Write(word.GetDisplayText() + " ");
-            }
-            Console.WriteLine("\n");
-        }
-
-
-        // hide words
-        public void HideWord()
-        {
-            var random = new Random();
-            var unhiddenWords = Words.Where(w => !w._WordHidden).ToList();
-
-            if (unhiddenWords.Count >= 2)
-            {
-                Word word1 = unhiddenWords[random.Next(unhiddenWords.Count)];
-                Word word2 = unhiddenWords[random.Next(unhiddenWords.Count)];
-
-                while (word1 == word2)
-                {
-                    word2 = unhiddenWords[random.Next(unhiddenWords.Count)];
-                }
-
-                word1._WordHidden = true;
-                word2._WordHidden = true;
-            }
-        }
-    }
-
-
-     // The main program
     static void Main(string[] args)
     {
         var reference = "Matthew 12:12-13";
@@ -106,15 +23,17 @@ class Program
 
         while (true)
         {
-            Console.WriteLine("Press Enter to continue or type 'quit' to finish."); 
-             Console.Write(">");         
+            Console.WriteLine("Press Enter to continue or type 'quit' to finish.");
+            Console.Write(">");
             string user = Console.ReadLine().ToLower();
             if (user == "quit")
             {
                 break;
             }
+
             scripture.HideWord();
             scripture.DisplayScripture();
+
             bool allHidden = true;
             foreach (var word in scripture.Words)
             {
@@ -124,12 +43,86 @@ class Program
                     break;
                 }
             }
+            /* My Creativity
+            Ask the User to guess a word in the scripture*/
 
             if (allHidden)
             {
-                Console.WriteLine("Stop pressing!\n");
-                break;
+                Console.WriteLine("Stop pressing!\nAll words in the scripture have been hidden.\n");
+                Console.Write("Type your first name: ");
+                string userName = Console.ReadLine();
+                userName = ToTitlecase(userName);
+
+                List<string> word3 = scripture.HiddenWords.Select(w => w.GetValue().ToLower()).ToList();
+
+                Console.WriteLine($"Welcome {userName} !");
+
+                bool game = true;
+                Random rand = new Random();
+
+                // Shuffle the list of words to guess
+                var hiddenWordsCopy = new List<string>(word3);
+                int currentWordIndex = 0;
+
+                while (game && hiddenWordsCopy.Count > 0)
+                {
+                    string wordToGuess = scripture.HiddenWords[rand.Next(scripture.HiddenWords.Count)].GetValue();
+                    // Select the next word to be guessed
+
+                    string TextWithHiddenword = HideAllWord(text, hiddenWordsCopy);
+                    Console.WriteLine($"\nhint:\n  {TextWithHiddenword}\n");
+
+                    // Randomly select one word from the HiddenWords list for the user to guess
+                    
+
+
+                    bool foundWord = false;
+
+                    while (!foundWord)
+                    {
+                        Console.Write("Guess a word in the scripture: ");
+                        string tentative = Console.ReadLine().Trim().ToLower();
+
+                        if (word3.Contains(tentative))
+                        {
+                            Console.WriteLine("Congrats! You guessed the correct word.");
+                            word3.Remove(tentative);  // Remove the word from the list
+                            foundWord = true;
+                            currentWordIndex++;
+                            break; 
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Sorry, that's not the correct word, the word was. Try again.");
+                        }
+                    }
+
+                    if (word3.Count > 0)
+                    {
+                        Console.Write("Do you want to retry? (yes/no): ");
+                        string reponse = Console.ReadLine().ToLower();
+
+                        if (reponse != "yes")
+                        {
+                            game = false;
+                            Console.WriteLine($"Well done!, the word is {wordToGuess}");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("All words have been guessed! Well done, goodbye.");
+                        game = false;
+                    }
+                }
             }
         }
+    }
+
+    public static string ToTitlecase(string userName)
+    {
+        return string.Join(" ", userName.Split(' ')
+                                        .Select(word => word.Length > 0 
+                                                        ? char.ToUpper(word[0]) + word.Substring(1).ToLower() 
+                                                        : ""));
     }
 }
