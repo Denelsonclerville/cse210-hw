@@ -16,7 +16,7 @@ public class GoalManager
     public void ListGoals()
     {
 
-        Console.WriteLine("\nYour Goals:");
+        Console.WriteLine("\nthe Goals are: ");
         int count = 1;
         foreach (Goal goal in _goals)
         {
@@ -48,7 +48,7 @@ public class GoalManager
         string choice = Console.ReadLine();
         Console.Write("Enter the name of the goal: ");
         string name = Console.ReadLine();
-        Console.Write("Enter goal description: ");
+        Console.Write("Enter  a short goal description: ");
         string description = Console.ReadLine();
 
         switch (choice)

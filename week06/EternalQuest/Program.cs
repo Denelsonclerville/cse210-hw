@@ -9,6 +9,7 @@ class Program
     {
         GoalManager goalManager = new GoalManager();
         string userChoice = "";
+        Console.Clear();
         //Console.WriteLine($"\nYou have: {goalManager.GetScore()} points\n");
         while (userChoice != "7")
         {
