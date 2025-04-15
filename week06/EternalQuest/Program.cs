@@ -9,11 +9,10 @@ class Program
     {
         GoalManager goalManager = new GoalManager();
         string userChoice = "";
-
+        //Console.WriteLine($"\nYou have: {goalManager.GetScore()} points\n");
         while (userChoice != "7")
         {
-
-           // Console.WriteLine($"\n you have {points} point\n");
+            Console.WriteLine($"\nYou have: {goalManager.GetScore()} points\n");        
             Console.WriteLine("=== Menu Option ===");
             Console.WriteLine("1. Create New Goal");
             Console.WriteLine("2. List Goals");

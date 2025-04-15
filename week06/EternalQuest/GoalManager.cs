@@ -1,6 +1,10 @@
 public class GoalManager
 {
 
+    public int GetScore()
+    {
+        return _score;
+    }
     private List<Goal> _goals = new List<Goal>();
     private int _score = 0;
 
@@ -28,15 +32,15 @@ public class GoalManager
         int filled = (progress * barWidth) / total;
         string bar = new string('#', filled).PadRight(barWidth, '-');
 
-        Console.WriteLine($"\nCurrent Score: {_score} points");
-        Console.WriteLine($"Level: {level}");
-        Console.WriteLine($"Progress to next level: [{bar}] {progress}/{total}\n");
+        Console.WriteLine($"\nYou have: {_score} points");
+        //Console.WriteLine($"Level: {level}");
+        //Console.WriteLine($"Progress to next level: [{bar}] {progress}/{total}\n");
     }
 
     public void CreateGoal()
     {
 
-        Console.WriteLine("What type of goal would you like to create?: ");
+        Console.WriteLine("\nWhat type of goal would you like to create?: ");
         Console.WriteLine("1. Simple Goal");
         Console.WriteLine("2. Eternal Goal");
         Console.WriteLine("3. Checklist Goal");
