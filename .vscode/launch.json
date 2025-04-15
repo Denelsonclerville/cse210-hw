@@ -26,6 +26,12 @@
       "projectPath": "${workspaceFolder}/<relative-path-to-project-folder><project-name>.csproj"
     },
     {
+      "name": "C#: <project-name> Debug",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/<relative-path-to-project-folder><project-name>.csproj"
+    },
+    {
       "name": ".NET Core Launch (console)",
       "type": "coreclr",
       "request": "launch",
