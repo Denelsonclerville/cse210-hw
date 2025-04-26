@@ -79,7 +79,7 @@ public class GoalManager
                 Console.WriteLine("Invalid option.");
                 break;
 
-        Console.WriteLine("Invalid option.");   
+        //Console.WriteLine("Invalid option.");   
         }
     }
 
